@@ -1,34 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pastelería Dulce Sabor</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <header>
-    <h1>Pastelería Dulce Sabor</h1>
-    <nav>
+  <header class="encabezado">
+    <div class="logo">
+      <h1>Pastelería dulce sabor</h1>
+    </div>
+    <nav class="navegacion">
       <ul>
         <li><a href="#">Inicio</a></li>
-        <li><a href="#">Productos</a></li>
-        <li><a href="#">Contacto</a></li>
+        <li><a href="#">Menú</a></li>
+        <li><a href="#">Contáctanos</a></li>
       </ul>
     </nav>
+    <div class="iconos">
+      <i class="fas fa-search"></i>
+      <i class="fas fa-user"></i>
+      <i class="fas fa-shopping-cart"></i>
+    </div>
   </header>
+
+  <!-- Banner principal -->
+  <section class="banner">
+    <img src="banner-pasteleria.jpg">
+
+  </section>
 
   <main>
     <section class="productos">
       <h2>Nuestros Pasteles</h2>
       <div class="catalogo">
-        <!-- Aquí irán los productos -->
         <div class="producto">
           <img src="img/pastel-chocolate.jpg" alt="Pastel de Chocolate">
           <h3>Pastel de Chocolate</h3>
           <p>$250 MXN</p>
           <button>Agregar al carrito</button>
         </div>
+        <!-- Puedes agregar más productos aquí -->
       </div>
     </section>
   </main>
