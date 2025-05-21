@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Cuenta - Pastelería Dulce Sabor</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Estilo Pinterest con colores rosados */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff0f6;
+      color: #5e2d4b;
+    }
+    
+    .pinterest-header {
+      background-color: #fa5e98;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    }
+    
+    .pinterest-logo {
+      color: #137076;
+      font-weight: bold;
+      font-size: 24px;
+      letter-spacing: -1px;
+    }
+    
+    .pinterest-logo i {
+      margin-right: 8px;
+    }
+    
+    .pinterest-container {
+      max-width: 400px;
+      margin: 30px auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    
+    .pinterest-form-header {
+      background: linear-gradient(to right, #ff8fab, #ff66b3);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .pinterest-form-header h2 {
+      margin: 0;
+      font-size: 22px;
+    }
+    
+    .pinterest-form-body {
+      padding: 30px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #5e2d4b;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #ffcce0;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s;
+      box-sizing: border-box;
+    }
+    
+    .form-group input:focus {
+      border-color: #ff66b3;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255, 102, 179, 0.2);
+    }
+    
+    .btn-pinterest {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right, #ff8fab, #ff66b3);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .btn-pinterest:hover {
+      background: linear-gradient(to right, #ff66b3, #ff3385);
+      transform: translateY(-2px);
+    }
+    
+    .pinterest-footer {
+      text-align: center;
+      margin-top: 20px;
+      color: #a37a8c;
+    }
+    
+    .pinterest-footer a {
+      color: #ff66b3;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .pinterest-footer a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Mensajes flash */
+    .flash-messages {
+      margin: 15px 0;
+    }
+    
+    .flash-success {
+      color: #4caf50;
+      background-color: #e8f5e9;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    .flash-error {
+      color: #f44336;
+      background-color: #ffebee;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    /* Efecto Pinterest */
+    .pinterest-effect {
+      transition: all 0.3s ease;
+    }
+    
+    .pinterest-effect:hover {
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+<body>
+  <header class="pinterest-header">
+    <div class="pinterest-logo">
+      <i class="fas fa-birthday-cake"></i>
+      Pastelería Dulce Sabor
+    </div>
+  </header>
+
+  <div class="pinterest-container pinterest-effect">
+    <div class="pinterest-form-header">
+      <h2>Únete a nuestra comunidad</h2>
+    </div>
+    
+    <div class="pinterest-form-body">
+      <!-- Mensajes Flash -->
+      <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      </div>
+      
+      <form action="{{ url_for('crear_cuenta') }}" method="post">
+        <div class="form-group">
+          <label for="nombre"><i class="fas fa-user"></i> Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" required placeholder="Ej: María González">
+        </div>
+        
+        <div class="form-group">
+          <label for="correo"><i class="fas fa-envelope"></i> Correo electrónico</label>
+          <input type="email" id="correo" name="correo" required placeholder="tucorreo@ejemplo.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="contraseña"><i class="fas fa-lock"></i> Contraseña</label>
+          <input type="password" id="contraseña" name="contraseña" minlength="4" required placeholder="Mínimo 4 caracteres">
+        </div>
+        
+        <div class="form-group">
+          <label for="confirmar_contraseña"><i class="fas fa-lock"></i> Confirmar contraseña</label>
+          <input type="password" id="confirmar_contraseña" name="confirmar_contraseña" minlength="4" required placeholder="Repite tu contraseña">
+        </div>
+        
+        <button type="submit" class="btn-pinterest">
+          <i class="fas fa-user-plus"></i> Crear cuenta
+        </button>
+      </form>
+      
+      <div class="pinterest-footer">
+        <p>¿Ya tienes cuenta? <a href="{{ url_for('inicio') }}">Inicia sesión aquí</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

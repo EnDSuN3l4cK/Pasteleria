@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pastelería Dulce Sabor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body data-modal="{{ 'true' if mostrar_modal or cuenta_creada else 'false' }}">
+  <header class="encabezado">
+    <div class="logo">
+      <h1>Pastelería Dulce Sabor</h1>
+    </div>
+    <nav class="navegacion">
+      <ul>
+        <li><a href="{{ url_for('inicio') }}">Inicio</a></li>
+        <li><a href="{{ url_for('menu') }}">Menú</a></li>
+        <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
+      </ul>
+    </nav>
+   <div class="iconos">
+  <form action="{{ url_for('buscar') }}" method="get">
+    <input type="text" name="q" placeholder="Buscar...">
+    <button type="submit"><i class="fas fa-search"></i></button>
+  </form>
+
+  <a href="#" id="btnUser"><i class="fas fa-user"></i></a>
+
+  {% if session.get("usuario") %}
+    <span style="margin-left: 10px; color: #5e2d4b; font-weight: bold;">
+      Hola, {{ session.get("usuario") }}
+    </span>
+  {% endif %}
+
+  <a href="{{ url_for('carrito') }}"><i class="fas fa-shopping-cart"></i></a>
+</div>
+
+  </header>
+
+  <section class="banner">
+    <img src="{{ url_for('static', filename='img/principal.jpg') }}" alt="Pasteles">
+  </section>
+
+  <main>
+    <main>
+  <!-- Agrega este bloque de mensaje -->
+  {% if cuenta_creada %}
+  <div class="alert-success" style="
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    text-align: center;">
+    ¡Cuenta creada exitosamente! Por favor inicia sesión.
+  </div>
+  {% endif %}
+    <section class="informacion-empresa">
+      <h2>Sobre Nosotros</h2>
+
+      <div class="mision">
+        <h3>Misión</h3>
+        <p>Ofrecer pasteles artesanales de alta calidad que endulcen los momentos especiales de nuestros clientes.</p>
+      </div>
+
+      <div class="vision">
+        <h3>Visión</h3>
+        <p>Ser reconocida como la pastelería favorita de nuestra comunidad.</p>
+      </div>
+
+      <div class="objetivos">
+        <h3>Objetivos</h3>
+        <ul>
+          <li>Garantizar satisfacción con productos frescos.</li>
+          <li>Innovar en sabores y diseños.</li>
+          <li>Ampliar presencia en línea.</li>
+          <li>Fomentar un ambiente creativo.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Pastelería Dulce Sabor</p>
+  </footer>
+
+  <!-- Modal Login -->
+  <div id="loginModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span id="closeModal" class="close-btn">&times;</span>
+      <h2>Conectarme a mi cuenta</h2>
+      <p>Ingresa tu e-mail y contraseña</p>
+
+      {% if error %}
+        <p style="color:red;">{{ error }}</p>
+      {% endif %}
+
+      <form action="{{ url_for('inicio') }}" method="post" class="login-form">
+        <label for="username">E-mail:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Ingresar</button>
+      </form>
+
+      <p>¿Nuevo cliente? <a href="{{ url_for('crear_cuenta') }}">Crear cuenta</a></p>
+      <p>¿Contraseña olvidada? <a href="{{ url_for('recuperar_contrasena') }}">Recuperar contraseña</a></p>
+    </div>
+  </div>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("loginModal");
+    const btnUser = document.getElementById("btnUser");
+    const closeModal = document.getElementById("closeModal");
+
+    // Función para abrir el modal
+    function openModal() {
+      modal.style.display = "block";
+    }
+
+    // Función para cerrar el modal
+    function closeModalFunc() {
+      modal.style.display = "none";
+    }
+
+    // Abrir modal al hacer clic en el ícono de usuario
+    if (btnUser) {
+      btnUser.addEventListener("click", function (e) {
+        e.preventDefault();
+        openModal();
+      });
+    }
+
+    // Cerrar modal con el botón X
+    closeModal.addEventListener("click", closeModalFunc);
+
+    // Cerrar modal al hacer clic fuera
+    window.addEventListener("click", function (e) {
+      if (e.target === modal) {
+        closeModalFunc();
+      }
+    });
+
+    // Abrir automáticamente si data-modal es true
+    const mostrarModal = document.body.getAttribute("data-modal") === "true";
+    if (mostrarModal) {
+      openModal();
+    }
+  });
+</script>
+
+
+  
+</body>
+</html>

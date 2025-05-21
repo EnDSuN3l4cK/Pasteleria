@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar Contraseña - Pastelería Dulce Sabor</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff0f6;
+      color: #5e2d4b;
+    }
+
+    .pinterest-header {
+      background-color: #ff66b3;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    }
+
+    .pinterest-logo {
+      color: #137076;
+      font-weight: bold;
+      font-size: 24px;
+      letter-spacing: -1px;
+    }
+
+    .pinterest-logo i {
+      margin-right: 8px;
+    }
+
+    .pinterest-container {
+      max-width: 400px;
+      margin: 30px auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .pinterest-form-header {
+      background: linear-gradient(to right, #ff8fab, #ff66b3);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .pinterest-form-header h2 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .pinterest-form-body {
+      padding: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #5e2d4b;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #ffcce0;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s;
+      box-sizing: border-box;
+    }
+
+    input[type="email"]:focus {
+      border-color: #ff66b3;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255, 102, 179, 0.2);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right, #ff8fab, #ff66b3);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #ff66b3, #ff3385);
+      transform: translateY(-2px);
+    }
+
+    .pinterest-footer {
+      text-align: center;
+      margin-top: 20px;
+      color: #a37a8c;
+    }
+
+    .pinterest-footer a {
+      color: #ff66b3;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .pinterest-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .flash-success {
+      color: #4caf50;
+      background-color: #e8f5e9;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .flash-error {
+      color: #f44336;
+      background-color: #ffebee;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="pinterest-header">
+    <div class="pinterest-logo">
+      <i class="fas fa-birthday-cake"></i>
+      Pastelería Dulce Sabor
+    </div>
+  </header>
+
+  <div class="pinterest-container">
+    <div class="pinterest-form-header">
+      <h2>Recuperar Contraseña</h2>
+    </div>
+
+    <div class="pinterest-form-body">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form action="{{ url_for('recuperar_contrasena') }}" method="post">
+        <label for="correo"><i class="fas fa-envelope"></i> Correo electrónico</label>
+        <input type="email" id="correo" name="correo" required>
+
+        <button type="submit"><i class="fas fa-paper-plane"></i> Enviar enlace</button>
+      </form>
+
+      <div class="pinterest-footer">
+        <p><a href="{{ url_for('inicio') }}">Volver al inicio</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
